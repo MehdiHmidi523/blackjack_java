@@ -1,36 +1,50 @@
 package BlackJack.controller;
 
+import BlackJack.model.IObserver;
 import BlackJack.view.IView;
 import BlackJack.model.Game;
 
-public class PlayGame {
+public class PlayGame implements IObserver{
 
-  public boolean Play(Game a_game, IView a_view) {
-    a_view.DisplayWelcomeMessage();
-    
-    a_view.DisplayDealerHand(a_game.GetDealerHand(), a_game.GetDealerScore());
-    a_view.DisplayPlayerHand(a_game.GetPlayerHand(), a_game.GetPlayerScore());
-
-    if (a_game.IsGameOver())
-    {
-        a_view.DisplayGameOver(a_game.IsDealerWinner());
+    private Game game;
+    private IView view;
+    public PlayGame(Game a_game, IView a_view){
+        game = a_game;
+        view = a_view;
+        a_game.register(this);
     }
 
-    int input = a_view.GetInput();
-    
-    if (input == 'p')
-    {
-        a_game.NewGame();
-    }
-    else if (input == 'h')
-    {
-        a_game.Hit();
-    }
-    else if (input == 's')
-    {
-        a_game.Stand();
+    public boolean Play(Game a_game, IView a_view) {
+
+        a_view.DisplayClearConsole();
+        a_view.DisplayWelcomeMessage();
+
+        view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
+        view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
+
+        if (a_game.IsGameOver()) {
+            a_view.DisplayGameOver(a_game.IsDealerWinner());
+        }
+        IView.InputChoice choice = a_view.GetInput();
+        switch (choice) {
+            case P:
+                a_game.NewGame();
+                break;
+            case H:
+                a_game.Hit();
+                view.pauseProgram();
+                break;
+            case S:
+                a_game.Stand();
+                view.pauseProgram();
+                break;
+        }
+        return choice != IView.InputChoice.Q;
     }
 
-    return input != 'q';
-  }
+    public void update() {
+        view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
+        view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
+    }
+
 }

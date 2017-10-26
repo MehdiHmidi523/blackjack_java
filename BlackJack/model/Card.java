@@ -10,7 +10,7 @@ public class Card {
     Count,
     Hidden
   }
-  
+
   public enum Value {
     Two,
     Three,
