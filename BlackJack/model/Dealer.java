@@ -33,12 +33,10 @@ public class Dealer extends Player {
       Card c = DealAndShowCard();
       a_player.DealCard(c);
       for (INewCardDealtObserver subscriber : subscribers) {
-          subscriber.NotifyNewCardDealt();            // calls the Notify () in playGame - notify controller (and print in view) that new card has been dealt
+          subscriber.NotifyNewCardDealt();            // calls the Notify () in playGame that a new card has been dealt
       }
-
       return true;
-    }
-    return false;
+    }return false;
   }
 
   boolean Stand() {
@@ -64,5 +62,9 @@ public class Dealer extends Player {
     c.Show(true);
     return c;
   }
+
+  public void addSubscriber(INewCardDealtObserver subscriber){
+        subscribers.add(subscriber);
+    }
 
 }

@@ -1,5 +1,7 @@
 package BlackJack.view;
 
+import BlackJack.controller.IButtonPressedObserver;
+
 public interface IView {
   void DisplayWelcomeMessage();
   //int GetInput();
@@ -9,4 +11,5 @@ public interface IView {
   void DisplayGameOver(boolean a_dealerIsWinner);
   void DisplayClearConsole();
   void DisplayDealerStatus () ; // Observer
+  void addSubscriber(IButtonPressedObserver subscriber);
 }

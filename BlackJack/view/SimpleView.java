@@ -1,5 +1,7 @@
 package BlackJack.view;
 
+import BlackJack.controller.IButtonPressedObserver;
+
 import java.util.Scanner;
 
 public class SimpleView implements IView {
@@ -15,17 +17,34 @@ public class SimpleView implements IView {
     private int GetInput(){
         System.out.println("Type 'p' to Play, 'h' to Hit, 's' to Stand or 'q' to Quit\n");
 
-       /* try {
-                int c = System.in.read();
-                while (c == '\r' || c =='\n') {
-                    c = System.in.read();
+        try {
+            int c = System.in.read();
+            while (c == '\r' || c =='\n') { c = System.in.read(); }
+            if ( c=='p') {
+                for (IButtonPressedObserver subscriber : subscribers){
+                    subscriber.playButtonPressed();
                 }
-                return c;
-            } catch (java.io.IOException e) {
-                System.out.println("" + e);
-                return 0;
-            }*/
-       return 90;
+            }
+            else if (c=='h') {
+                for (IButtonPressedObserver subscriber : subscribers){
+                    subscriber.hitButtonPressed();
+                }
+            }
+            else if (c=='s') {
+                for (IButtonPressedObserver subscriber : subscribers){
+                    subscriber.standButtonPressed();
+                }
+            }
+            else if (c=='q') {
+                for (IButtonPressedObserver subscriber : subscribers){
+                    subscriber.quitButtonPressed();
+                }
+            }
+            GetInput();	// endless loop
+        } catch (java.io.IOException e) {
+            System.out.println("" + e);
+            return 0;
+        }
     }
 
     @Override
@@ -37,18 +56,18 @@ public class SimpleView implements IView {
       System.out.println("" + a_card.GetValue() + " of " + a_card.GetColor());
     }
 
-    public void DisplayPlayerHand(Iterable<BlackJack.model.Card> a_hand, int a_score) {
-      DisplayHand("Player", a_hand, a_score);
+    public void DisplayPlayerHand(Iterable<BlackJack.model.Card> hand, int score) {
+         DisplayHand("Player", hand, score);
     }
 
-    public void DisplayDealerHand(Iterable<BlackJack.model.Card> a_hand, int a_score) {
-        DisplayHand("Dealer", a_hand, a_score);
+    public void DisplayDealerHand(Iterable<BlackJack.model.Card> hand, int score) {
+        DisplayHand("Dealer", hand, score);
     }
 
-    private void DisplayHand(String a_name, Iterable<BlackJack.model.Card> a_hand, int a_score) {
-        System.out.println(a_name + " Has: ");
-        for(BlackJack.model.Card c : a_hand) { DisplayCard(c); }
-        System.out.println("Score: " + a_score);
+    private void DisplayHand(String name, Iterable<BlackJack.model.Card> hand, int score) {
+        System.out.println(name + " Has: ");
+        for(BlackJack.model.Card c : hand) { DisplayCard(c); }
+        System.out.println("Score: " + score);
         System.out.println("");
     }
 

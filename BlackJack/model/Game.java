@@ -46,9 +46,8 @@ public class Game {
     return m_player.CalcScore();
   }
 
-  public void register(IObserver a_observer) {
-    m_player.register(a_observer);
-    m_dealer.register(a_observer);
+  public void addSubscriber(INewCardDealtObserver subscriber){
+    m_dealer.addSubscriber(subscriber); 			// add subscriber to publisher (dealer) for event -> new card = notify
   }
   
 }
