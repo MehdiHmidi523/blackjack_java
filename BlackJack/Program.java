@@ -9,7 +9,6 @@ public class Program {
     Game g = new Game();
     IView v = new SimpleView();
     PlayGame ctrl = new PlayGame(g, v);
-
-    while (ctrl.Play(g, v));
+    ctrl.Play();
   }
 }

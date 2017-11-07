@@ -4,13 +4,29 @@ import java.util.Scanner;
 
 public class SimpleView implements IView {
   public void DisplayWelcomeMessage() {
-      for(int i = 0; i < 2; i++) {System.out.print("\n");};
+      for(int i = 0; i < 1; i++){System.out.print("\n");}
       System.out.println(" _____________________________________________");
       System.out.println("|                                             |");
       System.out.println("| ҉҉҉҉҉҉     Welcome to BLACKJACK      ҉҉҉҉҉҉ |") ;
       System.out.println("|_____________________________________________|\n");
-      System.out.println("Type 'p' to Play, 'h' to Hit, 's' to Stand or 'q' to Quit\n");
+      GetInput();
   }
+
+    private int GetInput(){
+        System.out.println("Type 'p' to Play, 'h' to Hit, 's' to Stand or 'q' to Quit\n");
+
+       /* try {
+                int c = System.in.read();
+                while (c == '\r' || c =='\n') {
+                    c = System.in.read();
+                }
+                return c;
+            } catch (java.io.IOException e) {
+                System.out.println("" + e);
+                return 0;
+            }*/
+       return 90;
+    }
 
     public void DisplayCard(BlackJack.model.Card a_card) {
       System.out.println("" + a_card.GetValue() + " of " + a_card.GetColor());
@@ -49,10 +65,8 @@ public class SimpleView implements IView {
 
     public void DisplayClearConsole(){ System.out.flush(); }
 
-    @Override
-    public void visit(AmericanNewGameStrategy americanNewGameStrategy) {
-        System.out.println("Game Strategy: American");
-    }
+    /*@Override
+    public void visit(AmericanNewGameStrategy americanNewGameStrategy) { System.out.println("Game Strategy: American"); }
     @Override
     public void visit(InternationalNewGameStrategy internationalNewGameStrategy) { System.out.println("Game Strategy: International"); }
     @Override
@@ -63,4 +77,5 @@ public class SimpleView implements IView {
     public void visit(D_WinningRule d_winingRule) { System.out.println("Winning Rule: Dealer"); }
     @Override
     public void visit(P_WinningRule p_WiningRule) { System.out.println("Winning Rule: Player"); }
+    */
 }
