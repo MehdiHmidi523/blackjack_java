@@ -1,11 +1,11 @@
 package BlackJack.controller;
 
-import BlackJack.model.INewCardDealedObserver;
+import BlackJack.model.INewCardDealtObserver;
 import BlackJack.model.IObserver;
 import BlackJack.view.IView;
 import BlackJack.model.Game;
 
-public class PlayGame implements IObserver, INewCardDealedObserver{
+public class PlayGame implements IObserver, INewCardDealtObserver {
 
     private Game game;
     private IView view;
@@ -32,7 +32,7 @@ public class PlayGame implements IObserver, INewCardDealedObserver{
     }
 
     @Override
-    public void NotifyNewCardDealed() {
+    public void NotifyNewCardDealt() {
         try {
             view.DisplayDealerStatus();    // Display the Dealer status
             Thread.sleep(2500); //Delay
