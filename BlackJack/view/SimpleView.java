@@ -28,6 +28,11 @@ public class SimpleView implements IView {
        return 90;
     }
 
+    @Override
+    public void DisplayDealerStatus() {
+        for ( int i = 0 ; i<1 ; i++ ) { System.out.print("\n") ; }
+        System.out.println("getting a card...\n");
+    }
     public void DisplayCard(BlackJack.model.Card a_card) {
       System.out.println("" + a_card.GetValue() + " of " + a_card.GetColor());
     }
@@ -42,9 +47,7 @@ public class SimpleView implements IView {
 
     private void DisplayHand(String a_name, Iterable<BlackJack.model.Card> a_hand, int a_score) {
         System.out.println(a_name + " Has: ");
-        for(BlackJack.model.Card c : a_hand) {
-            DisplayCard(c);
-        }
+        for(BlackJack.model.Card c : a_hand) { DisplayCard(c); }
         System.out.println("Score: " + a_score);
         System.out.println("");
     }
@@ -53,14 +56,6 @@ public class SimpleView implements IView {
         System.out.println("GameOver: ");
         if (a_dealerIsWinner)  System.out.println("Dealer Won!");
         else  System.out.println("You Won!");
-    }
-
-    public void pauseProgram() {
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void DisplayClearConsole(){ System.out.flush(); }

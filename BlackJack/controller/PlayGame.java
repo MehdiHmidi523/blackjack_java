@@ -1,10 +1,11 @@
 package BlackJack.controller;
 
+import BlackJack.model.INewCardDealedObserver;
 import BlackJack.model.IObserver;
 import BlackJack.view.IView;
 import BlackJack.model.Game;
 
-public class PlayGame implements IObserver{
+public class PlayGame implements IObserver, INewCardDealedObserver{
 
     private Game game;
     private IView view;
@@ -30,4 +31,16 @@ public class PlayGame implements IObserver{
         view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
     }
 
+    @Override
+    public void NotifyNewCardDealed() {
+        try {
+            view.DisplayDealerStatus();    // Display the Dealer status
+            Thread.sleep(2500); //Delay
+            view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
+            view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
+        }
+        catch ( InterruptedException e ) {
+            e.printStackTrace();
+        }
+    }
 }

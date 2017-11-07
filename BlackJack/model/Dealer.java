@@ -2,24 +2,21 @@ package BlackJack.model;
 
 import BlackJack.model.rules.*;
 
+import java.util.List;
+
 public class Dealer extends Player {
 
   private Deck m_deck;
   private INewGameStrategy m_newGameRule;
   private IHitStrategy m_hitRule;
   private IPlayerWinsOnEqualHand m_WinnerRule;
+  private List<INewCardDealedObserver> subscribers;
 
   Dealer(RulesFactory a_rulesFactory) {
-
     m_newGameRule = a_rulesFactory.GetNewGameRule();
     m_hitRule = a_rulesFactory.GetHitRule();
     m_WinnerRule = a_rulesFactory.GetWinnerRule();
-    /*for(Card c : m_deck.GetCards()) {
-      c.Show(true);
-      System.out.println("" + c.GetValue() + " of " + c.GetColor());
-    }    */
   }
-
 
   boolean NewGame(Player a_player) {
     if (m_deck == null || IsGameOver()) {
@@ -35,6 +32,10 @@ public class Dealer extends Player {
     if (m_deck != null && a_player.CalcScore() < g_maxScore && !IsGameOver()) {
       Card c = DealAndShowCard();
       a_player.DealCard(c);
+      for (INewCardDealedObserver subscriber : subscribers) {
+          subscriber.NotifyNewCardDealed();            // calls the Notify () in playGame - notify controller (and print in view) that new card has been dealt
+      }
+
       return true;
     }
     return false;
