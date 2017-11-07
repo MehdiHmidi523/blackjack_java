@@ -2,10 +2,13 @@ package BlackJack.view;
 
 import BlackJack.controller.IButtonPressedObserver;
 
-import java.util.Scanner;
+import java.util.List;
 
 public class SimpleView implements IView {
-  public void DisplayWelcomeMessage() {
+
+    List<IButtonPressedObserver> subscribers;
+
+    public void DisplayWelcomeMessage() {
       for(int i = 0; i < 1; i++){System.out.print("\n");}
       System.out.println(" _____________________________________________");
       System.out.println("|                                             |");
@@ -14,7 +17,7 @@ public class SimpleView implements IView {
       GetInput();
   }
 
-    private int GetInput(){
+    private void GetInput(){
         System.out.println("Type 'p' to Play, 'h' to Hit, 's' to Stand or 'q' to Quit\n");
 
         try {
@@ -43,7 +46,6 @@ public class SimpleView implements IView {
             GetInput();	// endless loop
         } catch (java.io.IOException e) {
             System.out.println("" + e);
-            return 0;
         }
     }
 
@@ -52,6 +54,12 @@ public class SimpleView implements IView {
         for ( int i = 0 ; i<1 ; i++ ) { System.out.print("\n") ; }
         System.out.println("getting a card...\n");
     }
+
+    @Override
+    public void addSubscriber(IButtonPressedObserver subscriber) {
+
+    }
+
     public void DisplayCard(BlackJack.model.Card a_card) {
       System.out.println("" + a_card.GetValue() + " of " + a_card.GetColor());
     }

@@ -26,10 +26,6 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
         view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
         view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
     }
-    public void update() {
-        view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
-        view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
-    }
 
     @Override
     public void NotifyNewCardDealt() {
@@ -44,14 +40,22 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
         }
     }
 
+    private void checkGameOver(){
+        if (game.IsGameOver()) { view.DisplayGameOver(game.IsDealerWinner());}
+    }
+
     @Override
     public void playButtonPressed() {
-
+        game.NewGame();
+        showPlayerHands();
+        checkGameOver();
     }
 
     @Override
     public void hitButtonPressed() {
-
+        game.Hit();
+        showPlayerHands();
+        checkGameOver();
     }
 
     @Override

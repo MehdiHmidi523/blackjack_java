@@ -5,5 +5,4 @@ public interface IButtonPressedObserver {
 	void hitButtonPressed();
 	void standButtonPressed();
 	void quitButtonPressed();
-
 }
