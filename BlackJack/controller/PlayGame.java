@@ -58,9 +58,10 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
         checkGameOver();
     }
 
-    @Override
-    public void standButtonPressed() {
-
+    public void standButtonPressed(){
+        game.Stand();
+        showPlayerHands();
+        checkGameOver();
     }
 
     @Override

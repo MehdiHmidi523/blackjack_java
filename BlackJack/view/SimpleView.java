@@ -57,7 +57,7 @@ public class SimpleView implements IView {
 
     @Override
     public void addSubscriber(IButtonPressedObserver subscriber) {
-
+        subscribers.add(subscriber);
     }
 
     public void DisplayCard(BlackJack.model.Card a_card) {

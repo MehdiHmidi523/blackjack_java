@@ -1,6 +1,13 @@
 package BlackJack.view;
 
-import java.util.Scanner;
+import BlackJack.controller.IButtonPressedObserver;
+
+
+/*************
+ *
+ * NOT MAINTAINED
+ *
+ **************/
 
 public class SwedishView implements IView
     {
@@ -8,14 +15,27 @@ public class SwedishView implements IView
         {
          
             for(int i = 0; i < 50; i++) {System.out.print("\n");};
-            System.out.println(" _____________________________________________");
-            System.out.println("|                                             |");
-            System.out.println("| ҉҉҉҉҉҉     Hej Black Jack V�rlden   ҉҉҉҉҉҉ |") ;
-            System.out.println("|_____________________________________________|\n");
 
-            System.out.println("Skriv 'p' f�r att Spela, 'h' f�r nytt kort, 's' f�r att stanna 'q' f�r att avsluta\n");
+            System.out.println("Hej Black Jack Världen");
+            System.out.println("----------------------");
+            System.out.println("Skriv 'p' för att Spela, 'h' för nytt kort, 's' för att stanna 'q' för att avsluta\n");
         }
-
+        
+        
+        public int GetInput()
+        {
+          try {
+            int c = System.in.read();
+            while (c == '\r' || c =='\n') {
+              c = System.in.read();
+            }
+            return c;
+          } catch (java.io.IOException e) {
+            System.out.println("" + e);
+            return 0;
+          }
+        }
+        
         public void DisplayCard(BlackJack.model.Card a_card)
         {
             if (a_card.GetColor() == BlackJack.model.Card.Color.Hidden)
@@ -25,9 +45,9 @@ public class SwedishView implements IView
             else
             {
                 String colors[] = 
-                    { "Hj�rter", "Spader", "Ruter", "Kl�ver" };
+                    { "Hjärter", "Spader", "Ruter", "Klöver" };
                 String values[] =  
-                    { "tv�", "tre", "fyra", "fem", "sex", "sju", "�tta", "nio", "tio", "knekt", "dam", "kung", "ess" };
+                    { "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "knekt", "dam", "kung", "ess" };
                 System.out.println("" + colors[a_card.GetColor().ordinal()] + " " + values[a_card.GetValue().ordinal()]);
             }
         }
@@ -52,26 +72,28 @@ public class SwedishView implements IView
             }
         }
 
-        public void pauseProgram() {
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        public void DisplayClearConsole(){ System.out.flush(); }
 
-        public void DisplayClearConsole() {
-            System.out.flush();
-        }
-
-        private void DisplayHand(String a_name, Iterable<BlackJack.model.Card> a_hand, int a_score)
-        {
+        private void DisplayHand(String a_name, Iterable<BlackJack.model.Card> a_hand, int a_score) {
             System.out.println(a_name + " Har: " + a_score);
             for(BlackJack.model.Card c : a_hand)
             {
                 DisplayCard(c);
             }
-            System.out.println("Po�ng: " + a_score);
+            System.out.println("Poäng: " + a_score);
             System.out.println("");
         }
+
+        @Override
+		public void DisplayDealerStatus() {
+            for ( int i = 0 ; i<20 ; i++ ) {
+                System.out.println() ;
+                System.out.println("Dealer Getting a card");
+            }
+		}
+
+		@Override
+		public void addSubscriber(IButtonPressedObserver subscriber) {
+			// TODO Auto-generated method stub
+		}
     }
