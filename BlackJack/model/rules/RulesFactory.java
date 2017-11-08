@@ -6,7 +6,8 @@ public class RulesFactory {
       //return new BasicHitStrategy();
       return new SoftSeventeen();
   }
-  public INewGameStrategy GetNewGameRule() { return new AmericanNewGameStrategy();
+  public INewGameStrategy GetNewGameRule() {
+      return new AmericanNewGameStrategy();
       //return new InternationalNewGameStrategy();
   }
   public IPlayerWinsOnEqualHand GetWinnerRule() {

@@ -2,11 +2,16 @@ package BlackJack.view;
 
 import BlackJack.controller.IButtonPressedObserver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleView implements IView {
 
-    List<IButtonPressedObserver> subscribers;
+    private List<IButtonPressedObserver> subscribers;
+
+    public SimpleView(){
+        subscribers = new ArrayList<IButtonPressedObserver>();
+    }
 
     public void DisplayWelcomeMessage() {
       for(int i = 0; i < 1; i++){System.out.print("\n");}

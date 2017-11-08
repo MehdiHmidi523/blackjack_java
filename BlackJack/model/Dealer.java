@@ -2,6 +2,7 @@ package BlackJack.model;
 
 import BlackJack.model.rules.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dealer extends Player {
@@ -10,12 +11,14 @@ public class Dealer extends Player {
   private INewGameStrategy m_newGameRule;
   private IHitStrategy m_hitRule;
   private IPlayerWinsOnEqualHand m_WinnerRule;
-  private List<INewCardDealtObserver> subscribers;
+  private List<INewCardDealtObserver> subscribers ;
 
   Dealer(RulesFactory a_rulesFactory) {
     m_newGameRule = a_rulesFactory.GetNewGameRule();
     m_hitRule = a_rulesFactory.GetHitRule();
     m_WinnerRule = a_rulesFactory.GetWinnerRule();
+    subscribers = new ArrayList<INewCardDealtObserver>();
+
   }
 
   boolean NewGame(Player a_player) {
@@ -63,8 +66,6 @@ public class Dealer extends Player {
     return c;
   }
 
-  public void addSubscriber(INewCardDealtObserver subscriber){
-        subscribers.add(subscriber);
-    }
+  public void addSubscriber(INewCardDealtObserver subscriber){subscribers.add(subscriber); }
 
 }

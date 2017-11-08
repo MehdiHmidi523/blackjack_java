@@ -8,7 +8,7 @@ public class Program {
   public static void main(String[] a_args) throws InterruptedException {
     Game g = new Game();
     IView v = new SimpleView();
-    PlayGame ctrl = new PlayGame(g, v);
-    ctrl.Play();
+    PlayGame myGame = new PlayGame(g, v);
+    myGame.Play();
   }
 }

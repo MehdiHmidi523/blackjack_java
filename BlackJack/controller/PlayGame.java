@@ -10,10 +10,11 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
     private IView view;
 
     public PlayGame(Game a_game, IView a_view){
-        game = a_game;
-        a_game.addSubscriber(this);
         view = a_view;
         a_view.addSubscriber(this);
+        game = a_game;
+        a_game.addSubscriber(this);
+
     }
 
     public void Play() {
