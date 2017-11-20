@@ -1,5 +1,5 @@
 package BlackJack.model;
 
-public interface INewCardDealtObserver {
+public interface DealtObserver {
 	public void NotifyNewCardDealt();
 }

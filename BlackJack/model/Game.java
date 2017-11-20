@@ -46,8 +46,8 @@ public class Game {
     return m_player.CalcScore();
   }
 
-  public void addSubscriber(INewCardDealtObserver subscriber){
-    m_dealer.addSubscriber(subscriber); 			// add subscriber to publisher (dealer) for event -> new card = notify
+  public void addSubscriber(DealtObserver subscriber){
+    m_dealer.addSubscriber(subscriber); 	// add subscriber to publisher = dealer for event! new card = notify
   }
   
 }

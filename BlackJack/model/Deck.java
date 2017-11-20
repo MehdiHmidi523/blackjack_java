@@ -16,8 +16,6 @@ public class Deck {
         Card c = new Card(Card.Color.values()[cIx], Card.Value.values()[vIx]);
         AddCard(c);
       }
-
-    
     Shuffle();
   }
   

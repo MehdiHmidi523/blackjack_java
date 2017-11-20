@@ -1,10 +1,10 @@
 package BlackJack.controller;
 
-import BlackJack.model.INewCardDealtObserver;
+import BlackJack.model.DealtObserver;
 import BlackJack.view.IView;
 import BlackJack.model.Game;
 
-public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
+public class PlayGame implements CommandObserver, DealtObserver {
 
     private Game game;
     private IView view;
@@ -14,7 +14,6 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
         a_view.addSubscriber(this);
         game = a_game;
         a_game.addSubscriber(this);
-
     }
 
     public void Play() {
@@ -23,7 +22,7 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
         showPlayerHands();
     }
 
-    public void showPlayerHands(){
+    private void showPlayerHands(){
         view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
         view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
     }
@@ -32,7 +31,7 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
     public void NotifyNewCardDealt() {
         try {
             view.DisplayDealerStatus();    // Display Dealer status
-            Thread.sleep(2500);     //Delay
+            Thread.sleep(2000);     //Delay
             view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
             view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
         }
@@ -46,27 +45,27 @@ public class PlayGame implements IButtonPressedObserver, INewCardDealtObserver {
     }
 
     @Override
-    public void playButtonPressed() {
+    public void playPressed() {
         game.NewGame();
         showPlayerHands();
         checkGameOver();
     }
 
     @Override
-    public void hitButtonPressed() {
+    public void hitPressed() {
         game.Hit();
-        showPlayerHands();
+       // showPlayerHands();
         checkGameOver();
     }
 
-    public void standButtonPressed(){
+    public void standPressed(){
         game.Stand();
         showPlayerHands();
         checkGameOver();
     }
 
     @Override
-    public void quitButtonPressed() {
+    public void quitPressed() {
         System.exit(0);
     }
 }

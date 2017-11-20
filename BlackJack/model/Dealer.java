@@ -11,13 +11,13 @@ public class Dealer extends Player {
   private INewGameStrategy m_newGameRule;
   private IHitStrategy m_hitRule;
   private IPlayerWinsOnEqualHand m_WinnerRule;
-  private List<INewCardDealtObserver> subscribers ;
+  private List<DealtObserver> subscribers ;
 
   Dealer(RulesFactory a_rulesFactory) {
     m_newGameRule = a_rulesFactory.GetNewGameRule();
     m_hitRule = a_rulesFactory.GetHitRule();
     m_WinnerRule = a_rulesFactory.GetWinnerRule();
-    subscribers = new ArrayList<INewCardDealtObserver>();
+    subscribers = new ArrayList<DealtObserver>();
 
   }
 
@@ -35,7 +35,7 @@ public class Dealer extends Player {
     if (m_deck != null && a_player.CalcScore() < g_maxScore && !IsGameOver()) {
       Card c = DealAndShowCard();
       a_player.DealCard(c);
-      for (INewCardDealtObserver subscriber : subscribers) {
+      for (DealtObserver subscriber : subscribers) {
           subscriber.NotifyNewCardDealt();            // calls the Notify () in playGame that a new card has been dealt
       }
       return true;
@@ -66,6 +66,6 @@ public class Dealer extends Player {
     return c;
   }
 
-  public void addSubscriber(INewCardDealtObserver subscriber){subscribers.add(subscriber); }
+  public void addSubscriber(DealtObserver subscriber){subscribers.add(subscriber); }
 
 }

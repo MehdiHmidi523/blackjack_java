@@ -1,11 +1,11 @@
 package BlackJack.view;
 
-import BlackJack.controller.IButtonPressedObserver;
+import BlackJack.controller.CommandObserver;
 
 
 /*************
  *
- * NOT MAINTAINED
+ * NOT MAINTAINED FOR CURRENT SUBMISSION
  *
  **************/
 
@@ -93,7 +93,7 @@ public class SwedishView implements IView
 		}
 
 		@Override
-		public void addSubscriber(IButtonPressedObserver subscriber) {
+		public void addSubscriber(CommandObserver subscriber) {
 			// TODO Auto-generated method stub
 		}
     }
